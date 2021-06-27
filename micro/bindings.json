@@ -1,0 +1,7 @@
+{
+    "Alt-/": "lua:comment.comment",
+    "CtrlUnderscore": "lua:comment.comment", 
+    "Ctrl-x": "Copy",
+    "Esc": "Quit",
+    "Alt-z":"Save,Quit",
+}

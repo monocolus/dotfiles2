@@ -1,0 +1,64 @@
+window: 
+  padding:
+# Отступы от самой рамки терминала по x,y. У меня отступов нет.
+    x: 20
+    y: 25
+  dynamic_padding: false
+# Под декорациями имеется ввиду вид окна (transparent сделает края невидимыми)
+  decorations: full
+
+font:
+  size: 9.0
+  normal:
+    family: Hurmit Nerd Font Mono
+    style: Regular
+  bold:
+    family: agave Nerd Font
+    style: Bold
+  italic:
+    family: agave Nerd Font
+    style: Italic
+  # Offset is the extra space around each character. `offset.y` can be thought of
+  # as modifying the line spacing, and `offset.x` as modifying the letter spacing.
+  offset:
+    x: 0
+    y: 0
+
+background_opacity: 0.75
+
+colors:
+              # Default colors
+              primary:
+                background: '0x000000'
+                foreground: '0xE3FFF2'
+            
+              # Normal colors
+              normal:
+                black:   '0x393939'
+                red:     '0xff9f95'
+                green:   '0xe2ffc7'
+                yellow:  '0xffffb9'
+                blue:    '0xCBFCFF'
+                magenta: '0xe2b5cc'
+                cyan:    '0x8AD0CE'
+                white:   '0xdddddd'
+            
+              # Bright colors
+              bright:
+                black:   '0x474747'
+                red:     '0xff8d80'
+                green:   '0xdbffb3'
+                yellow:  '0xffbe64'
+                blue:    '0x7eb6ff'
+                magenta: '0xe296ff'
+                cyan:    '0x9ce9ff'
+                white:   '0xdddddd'
+            
+        
+    
+
+key_bindings:
+  - { key: V,        mods: Control,       action: Paste                        }
+  - { key: C,        mods: Control,       action: Copy                         }
+  - { key: W,        mods: Control,       action: Quit                         }
+print_events: false
