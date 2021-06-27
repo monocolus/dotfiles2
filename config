@@ -1,0 +1,139 @@
+
+set $mod Mod4
+
+# Set window title font
+font pango: PragmataPro 1
+
+# Volume keys
+bindsym $mod+plus		exec --no-startup-id pulsemixer --change-volume +5
+bindsym $mod+Shift+plus		exec --no-startup-id pulsemixer --change-volume +15
+bindsym $mod+minus 		exec --no-startup-id pulsemixer --change-volume -5
+bindsym $mod+Shift+minus	exec --no-startup-id pulsemixer --change-volume -15
+
+# Align window title
+title_align center
+floating_modifier $mod
+# Window rules
+for_window [class="^.*"] border pixel 0
+for_window [title="Library"] floating enable
+
+# Define gaps between windows
+gaps inner 15
+gaps outer 10
+
+# Drag floating windows (Mouse + $mod)
+floating_modifier $mod
+
+# Kill focused window
+bindsym $mod+Shift+q kill
+
+# Open applications
+bindsym $mod+T exec alacritty
+bindsym $mod+Print exec flameshot gui
+bindsym $mod+d exec /home/fedora/.config/rofi/launchers/colorful/launcher.sh
+# Change window focus
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# Move focused window
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# Split window in horizontal
+bindsym $mod+h split h
+
+# Split window in vertical
+bindsym $mod+v split v
+
+# Enter fullscreen mode for the focused window
+bindsym $mod+f fullscreen toggle
+
+# Change window layout (Stacked, tabbed or toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# Toggle between tiling and floating
+bindsym $mod+Shift+space floating toggle
+
+# Change focus between tiling and floating windows
+bindsym $mod+space focus mode_toggle
+
+# Focus the parent container
+bindsym $mod+a focus parent
+
+# Focus the child container
+#bindsym $mod+d focus child
+
+# ASSIGN
+assign [class="firefox"] $ws3
+assign [class="Alacritty"] $ws2
+assign [class="code - oss"] $ws4
+assign [class="Thunar"] $ws5
+assign [class="spotify"] $ws6
+assign [class="dis"] $ws8
+
+set $ws1 "1:  "
+set $ws2 "2:  "
+set $ws3 "3:  "
+set $ws4 "4:  "
+set $ws5 "5:  "
+set $ws6 "6:  "
+set $ws7 "7:  "
+set $ws8 "8:  "
+
+# Switch to workspaces
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+
+# Move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+
+# Reload the configuration file
+bindsym $mod+Shift+c reload
+
+# Restart i3 session inplace
+bindsym $mod+Shift+r restart
+
+# Resize window
+#bindsym $mod+Shift+h move left 20px
+#bindsym $mod+Shift+j move down 20px
+#bindsym $mod+Shift+k move up 20px
+#bindsym $mod+Shift+l move right 20px
+
+# Resizing Windows
+bindsym $mod+Ctrl+l resize shrink width 10 px or 10 ppt
+bindsym $mod+Ctrl+k resize grow height 10 px or 10 ppt
+bindsym $mod+Ctrl+j resize shrink height 10 px or 10 ppt
+bindsym $mod+Ctrl+h resize grow width 10 px or 10 ppt	
+
+# Customize colors
+client.focused          #96d1bb #96d1bb #141d16 #96d1bb #96d1bb
+client.focused_inactive #000000 #000000 #141d16 #000000 #000000
+client.unfocused        #000000 #000000 #37483b #000000 #000000
+client.urgent           #000000 #000000 #141d16 #000000 #000000
+client.placeholder      #000000 #000000 #37483b #000000 #000000
+
+# Run commands on startup
+exec_always --no-startup-id sh /home/fedora/.config/polybar/launch.sh
+exec_always --no-startup-id feh --bg-fill /home/fedora/WAALL/wal6.jpg
+exec_always --no-startup-id compton -b
+exec_always --no-startup-id dunst
+exec_always --no-startup-id sh /home/fedora/.config/polybar/scripts/spotify/launchlistener.sh 

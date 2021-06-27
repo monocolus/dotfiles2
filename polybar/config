@@ -1,0 +1,291 @@
+[colors]
+background = #aa00000
+foreground = #96d1bb
+red        = #fb4934
+green      = #b8bb26
+yellow     = #fabd2f
+blue       = #83a598
+purple     = #d3869b
+teal       = #8ec07c
+orange     = #ce945a
+gray       = #a89984
+g1="#2a4c49"	
+g2="#315955"	
+g3="#386561"	
+g4="#3f726d"
+g5="#467f7a"
+g6="#4d8b86"	
+g7="#4d8b86"	
+g8="#5ba49e"
+sep="#aaebdbb2"
+
+[bar/top]
+enable-ipc=true
+height = 30
+width = 100%
+offset-x = 10%
+offset-y = 10%
+radius = 0
+border-size = 0
+
+; Position
+bottom = false
+
+; Radius
+
+; Align modules fixed to middle
+fixed-center = true
+
+; Colors
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+; Underline
+line-size  = 3
+line-color = ${colors.foreground}
+
+; Border
+border-color = ${colors.background}
+
+margin-top = 5
+; Padding
+padding-left  = 1
+padding-right = 1
+; Margin of modules
+module-margin-left  = 1
+module-margin-right = 1
+
+; Font
+font-0 = Iosevka Heavy:size=9;2
+font-1 = Font Awesome 5 Free Solid:size=9;1
+font-2 = Font Awesome 5 Free Regular:size=9;1
+font-3 = Font Awesome 5 Brands Regular:size=9;1
+
+; Modlues
+modules-left   = poweroff time date weather memory 
+modules-center = s spotify previous playpause next
+modules-right  = i3 pick
+
+; Cursor actions
+cursor-click  = pointer
+cursor-scroll = ns-resize
+
+;monitor = ${env:MONITOR:VGA-1}
+
+[module/i3]
+type = internal/i3
+
+; Mouse click
+enable-click = true
+
+; Mouse scroll
+enable-scroll = false
+
+; Sort
+index-sort = true
+
+; Display icons
+fuzzy-match = true
+
+; Icons
+ws-icon-1       = 1
+ws-icon-2       = 2 
+ws-icon-3       = 3
+ws-icon-4       = 4
+ws-icon-5       = 5
+ws-icon-default =
+
+; Focused label
+label-focused            = %name%
+label-focused-background = ${colors.background}
+label-focused-foreground = ${colors.foreground}
+label-focused-padding    = 2
+label-focused-underline = ${colors.g7}
+
+; Unfocused labels
+label-unfocused            = %name%
+label-unfocused-foreground = ${colors.foreground}
+label-unfocused-padding    = 2
+
+; Visible labels
+label-visible            = %name%
+label-visible-foreground = ${colors.foreground}
+label-visible-padding    = 2
+
+; Urgent labels
+label-urgent            = %name%
+label-urgent-foreground = ${colors.red}
+label-urgent-padding    = 2
+
+
+
+[module/weather]
+type = custom/script
+
+; Script
+exec = /home/fedora/.config/polybar/scripts/weather.sh
+
+; Update interval
+interval = 600
+
+; Label
+label            = %output%
+label-foreground = ${colors.foreground}
+label-underline = ${colors.g6}
+label-background = ${colors.background}
+label-padding    = 2
+
+[module/w]
+type = custom/text
+
+; Label
+content            = 
+content-background = ${colors.background}
+content-foreground = ${colors.g4}
+content-padding    = 0
+
+[module/time]
+type = internal/date
+
+; Update interval
+interval = 1.0
+
+; Format
+time = %I:%M%P
+
+; Label
+label            =  %time%
+label-foreground = ${colors.foreground}
+label-background = ${colors.background}
+label-padding    = 2
+label-underline = ${colors.g3}
+
+[module/date]
+type = internal/date
+
+; Update interval
+interval = 1.0
+
+; Format
+date =%A, %d %B
+
+; Label
+label            =  %date%
+label-foreground = ${colors.foreground}
+label-background = ${colors.background}
+label-padding    = 2
+label-underline = ${colors.g4}
+
+
+[module/poweroff]
+type = custom/text
+
+; Label
+content            = 
+content-background = ${colors.background}
+content-foreground = ${colors.g3}
+content-padding    = 2
+label-underline = ${colors.g3}
+
+
+; Mouse click
+click-left = exec /home/fedora/.config/rofi/powermenu/powermenu.sh
+click-right = killall -q polybar && sh /home/fedora/.config/polybar/launch.sh 
+
+[module/pick]
+type = custom/text
+
+; Label
+content            = 
+content-background = ${colors.background}
+content-foreground = ${colors.g3}
+content-padding    = 2
+label-underline = ${colors.g4}
+
+
+; Mouse click
+click-left = exec gpick -p
+click-right = notify-send "Пошёл нахуй, чёрт обосранный" "Да, да. Это я тебе, хуила ебаная, я твой рот шатал, пока ты мой хуй сосал." -i redhat
+
+[module/s]
+type = custom/text
+
+; Label
+content            = 
+content-background = ${colors.background}
+content-foreground = ${colors.g4}
+content-padding    = 0
+
+[module/memory]
+type = internal/memory
+
+; Seconds to sleep between updates
+; Default: 1
+interval = 1
+format = <label>
+label =  %gb_used% 
+format-background = ${colors.background}
+format-foreground = ${colors.forekeyboardground}
+format-padding    = 2
+label-underline = ${colors.g7}
+
+# Spotify
+
+[module/previous]
+type = custom/script
+interval = 86400
+format = "%{T3}<label>"
+format-padding = 0
+; Previous song icon
+exec = echo ""
+; Check if spotify is running before displaying the icon
+exec-if = "pgrep spotify -x"
+click-left = "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous"
+format-foreground = ${colors.g3}
+
+[module/next]
+type = custom/script
+interval = 86400
+format = "%{T3}<label>"
+format-padding = 0
+; Next song icon
+exec = echo ""
+format-foreground = ${colors.g3}
+; Check if spotify is running before displaying the icon
+exec-if = "pgrep spotify -x"
+click-left = "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next"
+
+[module/playpause]
+type = custom/ipc
+; Default
+hook-0 = echo "Not playing"
+; Playing
+hook-1 = echo ""
+; Paused
+hook-2 = echo ""
+initial = 1
+format-padding = 0
+click-left = "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause"
+format-foreground = ${colors.g3}
+
+[module/spotify]
+type = custom/ipc
+hook-0 = echo ""
+hook-1 = python3 /home/fedora/.config/polybar/scripts/spotify/spotify_status.py
+initial = 1
+format-padding = 0
+; [i3wm only] - Uncomment the below line to focus on Spotify when clicking on the song name (credits to https://github.com/Esya)
+click-left = i3-msg '[class="Spotify"] focus'
+
+# End Spoti
+
+[settings]
+screenchange-reload     = true
+;compositing-background = compton
+;compositing-foreground = source
+;compositing-border     = over
+;pseudo-transparency    = true
+
+[global/wm]
+margin-top    = 30
+margin-bottom = 15
